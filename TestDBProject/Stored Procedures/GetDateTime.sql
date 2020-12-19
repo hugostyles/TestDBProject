@@ -1,0 +1,4 @@
+CREATE PROCEDURE [dbo].[GetDateTime]
+AS
+	select CURRENT_TIMESTAMP
+RETURN 0

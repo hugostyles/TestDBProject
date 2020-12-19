@@ -59,10 +59,16 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Stored Procedures" />
+    <Folder Include="PostDeployment" />
+    <Folder Include="PostDeployment\Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Table1.sql" />
     <Build Include="Stored Procedures\getVersion.sql" />
     <Build Include="Stored Procedures\GetServerName.sql" />
+    <PostDeploy Include="PostDeployment\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeployment\Scripts\insertpostdata.sql" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,4 @@
+﻿CREATE PROCEDURE [dbo].[GetServerName]
+AS
+	SELECT @@SERVERNAME
+RETURN 0

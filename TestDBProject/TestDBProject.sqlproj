@@ -63,5 +63,6 @@
   <ItemGroup>
     <Build Include="Tables\Table1.sql" />
     <Build Include="Stored Procedures\getVersion.sql" />
+    <Build Include="Stored Procedures\GetServerName.sql" />
   </ItemGroup>
 </Project>

@@ -67,6 +67,7 @@
     <Build Include="Stored Procedures\getVersion.sql" />
     <Build Include="Stored Procedures\GetServerName.sql" />
     <PostDeploy Include="PostDeployment\Script.PostDeployment.sql" />
+    <Build Include="Stored Procedures\GetDateTime.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PostDeployment\Scripts\insertpostdata.sql" />

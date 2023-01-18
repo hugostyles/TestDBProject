@@ -10,8 +10,6 @@ stages:
 
   jobs:
   - job: 'Prep'
-  pool:
-    vmImage: ubuntu-latest2
     steps:
     - task: PowerShell@2
       name: Verify_Parameters

@@ -1,19 +1,57 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# Pipeline includes two stages
+# MAIN_STAGE: All tested and working tasks
+# DEV_STAGE: Useful if you just want to test one single task without running the entire pipeline.
 
-trigger:
-- main
 
-pool:
-  vmImage: ubuntu-latest
+stages:
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- stage: 'Prepare'
+  displayName: 'Prepare'
 
-- script: |
-    echo Add other tasks to build, 123, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  jobs:
+  - job: 'Prep'
+  pool:
+    vmImage: ubuntu-latest2
+    steps:
+    - task: PowerShell@2
+      name: Verify_Parameters
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "Please review the below parameters:"
+
+- stage: 'Main_Stage'
+  displayName: 'Main Stage'
+  dependsOn: 'Prepare'
+  condition: succeeded('Prepare')
+  jobs:
+  - job: 'Main_Stage'
+    pool:
+      vmImage: ubuntu-latest2
+    timeoutInMinutes: 120
+    continueOnError: false
+    steps:
+    - script: echo Hello
+      displayName: 'Task 1'
+
+    - script: echo Hello
+      displayName: 'Task 2'
+    
+
+
+- stage: 'Dev_Stage'
+  displayName: 'Dev Stage'
+  dependsOn: 'Prepare'
+  condition: succeeded('Prepare')
+  jobs:
+  - job: 'Dev_Stage'
+    pool:
+      vmImage: ubuntu-latest2
+    timeoutInMinutes: 120
+    continueOnError: false
+    steps:
+    - script: echo Hello
+      displayName: 'Task 1'
+
+    - script: echo Hello
+      displayName: 'Task 2'

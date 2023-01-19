@@ -21,7 +21,7 @@ stages:
 - stage: 'Pre_Build_Checks'
   displayName: 'Pre Build Checks'
   #dependsOn: 'Prepare'
-  condition: succeeded('Prepare')
+  #condition: succeeded('Prepare')
   jobs:
   - job: 'Pre_Build_Checks'
     timeoutInMinutes: 120
@@ -33,7 +33,7 @@ stages:
 - stage: 'Database_Deployments'
   displayName: 'Database Deployments'
   #dependsOn: 'Pre_Build_Checks'
-  condition: succeeded('Pre_Build_Checks')
+  #condition: succeeded('Pre_Build_Checks')
   jobs:
   - job: 'Database_Deployments'
     timeoutInMinutes: 120
@@ -45,7 +45,7 @@ stages:
 - stage: 'Build_Config'
   displayName: 'Build Config'
   #dependsOn: 'Database_Deployments'
-  condition: succeeded('Database_Deployments')
+  #condition: succeeded('Database_Deployments')
   jobs:
   - job: 'Build_Config'
     timeoutInMinutes: 120
@@ -57,7 +57,7 @@ stages:
 - stage: 'Reporting_and_Monitoring'
   displayName: 'Reporting and Monitoring'
   #dependsOn: 'Build_Config'
-  condition: succeeded('Build_Config')
+  #condition: succeeded('Build_Config')
   jobs:
   - job: 'Reporting_and_Monitoring'
     timeoutInMinutes: 120
@@ -69,7 +69,7 @@ stages:
 - stage: 'Failover_Testing'
   displayName: 'Failover Testing'
   #dependsOn: 'Reporting_and_Monitoring'
-  condition: succeeded('Reporting_and_Monitoring')
+  #condition: succeeded('Reporting_and_Monitoring')
   jobs:
   - job: 'Failover_Testing'
     timeoutInMinutes: 120

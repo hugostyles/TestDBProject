@@ -18,22 +18,65 @@ stages:
         script: |
           Write-Host "Please review the below parameters:"
 
-- stage: 'Main_Stage'
-  displayName: 'Main Stage'
+- stage: 'Pre_Build_Checks'
+  displayName: 'Pre Build Checks'
   dependsOn: 'Prepare'
   condition: succeeded('Prepare')
   jobs:
-  - job: 'Main_Stage'
+  - job: 'Pre_Build_Checks'
     timeoutInMinutes: 120
     continueOnError: false
     steps:
     - script: echo Hello
-      displayName: 'Task 1'
+      displayName: 'Pre Build Task 1'
 
+- stage: 'Database_Deployments'
+  displayName: 'Database Deployments'
+  dependsOn: 'Pre_Build_Checks'
+  condition: succeeded('Pre_Build_Checks')
+  jobs:
+  - job: 'Database_Deployments'
+    timeoutInMinutes: 120
+    continueOnError: false
+    steps:
     - script: echo Hello
-      displayName: 'Task 2'
+      displayName: 'DB Deploy Task 1'
     
+- stage: 'Build_Config'
+  displayName: 'Build Config'
+  dependsOn: 'Database_Deployments'
+  condition: succeeded('Database_Deployments')
+  jobs:
+  - job: 'Build_Config'
+    timeoutInMinutes: 120
+    continueOnError: false
+    steps:
+    - script: echo Hello
+      displayName: 'Build Task 1'
 
+- stage: 'Reporting_and_Monitoring'
+  displayName: 'Reporting and Monitoring'
+  dependsOn: 'Build_Config'
+  condition: succeeded('Build_Config')
+  jobs:
+  - job: 'Reporting_and_Monitoring'
+    timeoutInMinutes: 120
+    continueOnError: false
+    steps:
+    - script: echo Hello
+      displayName: 'Reporting Task 1'
+
+- stage: 'Failover_Testing'
+  displayName: 'Failover Testing'
+  dependsOn: 'Reporting_and_Monitoring'
+  condition: succeeded('Reporting_and_Monitoring')
+  jobs:
+  - job: 'Failover_Testing'
+    timeoutInMinutes: 120
+    continueOnError: false
+    steps:
+    - script: echo Hello
+      displayName: 'Failover Task 1'
 
 - stage: 'Dev_Stage'
   displayName: 'Dev Stage'
@@ -45,7 +88,7 @@ stages:
     continueOnError: false
     steps:
     - script: echo Hello
-      displayName: 'Task 1'
+      displayName: 'Dev Task 1'
 
     - script: echo Hello
-      displayName: 'Task 2'
+      displayName: 'Dev Task 2'

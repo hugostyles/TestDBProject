@@ -24,8 +24,6 @@ stages:
   condition: succeeded('Prepare')
   jobs:
   - job: 'Main_Stage'
-    pool:
-      vmImage: ubuntu-latest2
     timeoutInMinutes: 120
     continueOnError: false
     steps:
@@ -43,8 +41,6 @@ stages:
   condition: succeeded('Prepare')
   jobs:
   - job: 'Dev_Stage'
-    pool:
-      vmImage: ubuntu-latest2
     timeoutInMinutes: 120
     continueOnError: false
     steps:
